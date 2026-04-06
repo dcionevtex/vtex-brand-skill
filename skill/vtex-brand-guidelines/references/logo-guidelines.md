@@ -89,6 +89,26 @@ In presentations: place the logo top-left on cover, section dividers, and conten
 
 ## Placeholder for Documents Without Logo File
 
+When generating a document and the logo file is unavailable, use this HTML/CSS placeholder:
+
+```html
+<div style="
+  display: inline-flex;
+  align-items: center;
+  background: #F71963;
+  padding: 6px 14px;
+  border-radius: 2px;
+">
+  <span style="
+    color: white;
+    font-family: 'VTEX Trust', sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    letter-spacing: 0.05em;
+  ">VTEX</span>
+</div>
+```
+
 For python-pptx, when the logo PNG/SVG is unavailable:
 
 ```python

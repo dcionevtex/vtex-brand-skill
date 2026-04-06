@@ -78,6 +78,8 @@ VTEX enables the customer to succeed. The customer succeeds. VTEX made it possib
 
 ## Headline Patterns
 
+Use these structural patterns for slide headlines and document titles:
+
 | Pattern | Example |
 |---|---|
 | Problem → solved | "Black Friday at scale. Zero downtime." |

@@ -107,6 +107,17 @@ def apply_heading_style(tf, size_pt=36):
             run.font.size = Pt(size_pt)
             run.font.bold = False
             run.font.italic = False
+    # Set line spacing to 100% (1.0 multiple)
+    from pptx.util import Pt
+    from pptx.oxml.ns import qn
+    from lxml import etree
+    for para in tf.paragraphs:
+        pPr = para._pPr
+        if pPr is None:
+            pPr = para._p.get_or_add_pPr()
+        lnSpc = etree.SubElement(pPr, qn('a:lnSpc'))
+        spcPct = etree.SubElement(lnSpc, qn('a:spcPct'))
+        spcPct.set('val', '100000')  # 100%
 
 def apply_body_style(tf, size_pt=18):
     """Apply VTEX body typography to a text frame."""
