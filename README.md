@@ -16,6 +16,8 @@ Once installed, Claude will automatically apply VTEX brand standards when you as
 - Brand voice and tone guidance
 - Full `python-pptx` PowerPoint builder with slide templates
 - Marp markdown-to-slides pattern
+- **Official logo assets** bundled in `assets/` (SVG in Rebel Pink / Serious Black / White) with a PNG generator for python-pptx
+- **Product UI (Admin) design tokens** from styleguide.vtex.com for demo mockups — kept separate from the brand palette
 
 ---
 
@@ -32,75 +34,16 @@ Once installed, Claude will automatically apply VTEX brand standards when you as
 ### Step 1 — Copy the skill to your Claude skills directory
 
 ```bash
-# Clone this repo
 git clone https://github.com/dcionevtex/vtex-brand-skill.git
-
-# Create the skills directory if it doesn't exist
 mkdir -p ~/.claude/skills
-
-# Copy the skill
 cp -r vtex-brand-skill/skill/vtex-brand-guidelines ~/.claude/skills/
 ```
 
-That's it. No restart needed — Claude Code picks up skills automatically.
-
-### Step 2 — Install the VTEX Trust font (optional, recommended)
-
-The font is required for `.pptx` files to render correctly.
-
-```bash
-# macOS — automated install
-curl -L -o /tmp/vtex-fonts.zip "https://brand.vtex.com/wp-content/uploads/2022/04/Tipografia.zip" \
-  && unzip -o /tmp/vtex-fonts.zip -d /tmp/vtex-fonts \
-  && unzip -o "/tmp/vtex-fonts/Tipografia/VTEX Trust_Public-20220427T202038Z-001.zip" \
-     -d /tmp/vtex-trust \
-  && cp /tmp/vtex-trust/"VTEX Trust_Public"/VTEXTrust-*.otf ~/Library/Fonts/ \
-  && echo "VTEX Trust installed"
-```
-
-For **Windows**: extract the ZIP and double-click each `.otf` file to install.
-
-### Step 3 — Install python-pptx (for .pptx generation)
+### Step 2 — Install python-pptx (for .pptx generation)
 
 ```bash
 pip3 install python-pptx
 ```
-
----
-
-## Usage
-
-Once the skill is installed, just ask Claude naturally:
-
-```
-create a VTEX presentation on our Q3 roadmap
-```
-```
-make a VTEX-branded slide deck for a customer discovery call
-```
-```
-apply VTEX brand guidelines to this document
-```
-```
-generate a VTEX proposal following brand standards
-```
-
-Claude will load the brand guidelines automatically and produce a ready-to-run Python script that generates the `.pptx` file.
-
----
-
-## Trigger phrases
-
-The skill activates on any of these:
-
-| Phrase | What happens |
-|---|---|
-| "create a VTEX presentation" | Generates a branded `.pptx` script |
-| "make a VTEX slide deck" | Generates a branded `.pptx` script |
-| "apply VTEX brand guidelines" | Applies brand rules to existing content |
-| "generate a VTEX-branded document" | Produces a branded artifact |
-| "create a PPT following VTEX brand" | Generates a branded `.pptx` script |
-| "use VTEX colors and fonts" | Applies color/type system |
 
 ---
 
@@ -110,12 +53,18 @@ The skill activates on any of these:
 skill/
 └── vtex-brand-guidelines/
     ├── SKILL.md                        ← Core skill loaded by Claude Code
+    ├── assets/
+    │   ├── vtex-logo-rebel-pink.svg    ← Official logo, light backgrounds (default)
+    │   ├── vtex-logo-serious-black.svg ← Official logo, light backgrounds (alt)
+    │   ├── vtex-logo-white.svg         ← Official logo, dark backgrounds
+    │   └── generate-pngs.py            ← Renders 960px PNGs for python-pptx (pip install cairosvg)
     └── references/
         ├── colors.md                   ← Full palette: hex, RGB, CMYK, Pantone, CSS vars
         ├── typography.md               ← Type scale, line-height, weight rules, CSS
-        ├── logo-guidelines.md          ← Clearspace, placement, dos/don'ts, placeholders
+        ├── logo-guidelines.md          ← Clearspace, placement, dos/don'ts, bundled assets
         ├── voice-tone.md               ← Brand personality, copy principles, review checklist
-        └── pptx-generation.md          ← Full python-pptx builder with 6 slide templates
+        ├── pptx-generation.md          ← Full python-pptx builder with 6 slide templates
+        └── product-ui-tokens.md        ← styleguide.vtex.com Admin tokens for demo mockups
 
 examples/
 └── vtex_composable_commerce.py        ← Ready-to-run 13-slide deck on Composable Commerce
@@ -123,49 +72,7 @@ examples/
 
 ---
 
-## Example: Composable Commerce deck
-
-A ready-to-run example is included in `examples/`.
-
-```bash
-cd examples
-pip3 install python-pptx
-
-# Without logos (uses text placeholder)
-python3 vtex_composable_commerce.py
-
-# With official logos (download from brand.vtex.com)
-python3 vtex_composable_commerce.py \
-  --logo-rebel /path/to/VTEX-Logo-Rebel.png \
-  --logo-white /path/to/VTEX-Logo-White.png
-
-# Custom output path
-python3 vtex_composable_commerce.py --output my_deck.pptx
-```
-
-This generates a 13-slide deck covering:
-
-| # | Type | Content |
-|---|---|---|
-| 1 | Cover | Title slide — dark bg, pink accent |
-| 2 | Section | The Problem |
-| 3 | Content | Pain points of monolithic platforms |
-| 4 | Stats | Cost of inaction — 3 large-number stats |
-| 5 | Section | What composable actually means |
-| 6 | Content | Composable vs headless, MACH definition |
-| 7 | Two-col | Monolith vs Composable side-by-side |
-| 8 | Section | How VTEX enables composable |
-| 9 | Content | VTEX architecture pillars |
-| 10 | Content | Three migration paths |
-| 11 | Quote | Customer quote slide |
-| 12 | Stats | Results — 3 large-number stats |
-| 13 | Closing | CTA slide — dark bg, vertical accent |
-
----
-
 ## Official brand assets
-
-Download directly from VTEX:
 
 | Asset | URL |
 |---|---|
@@ -173,18 +80,6 @@ Download directly from VTEX:
 | Font (VTEX Trust) | `https://brand.vtex.com/wp-content/uploads/2022/04/Tipografia.zip` |
 | Figma assets | [figma.com/design/VNkQ2Zmvn98cSyY9HZQNQZ/VTEX-Brand-Assets](https://www.figma.com/design/VNkQ2Zmvn98cSyY9HZQNQZ/VTEX-Brand-Assets) |
 | Brand site | [brand.vtex.com](https://brand.vtex.com/) |
-
----
-
-## Keeping it updated
-
-To get the latest version of the skill:
-
-```bash
-cd vtex-brand-skill
-git pull
-cp -r skill/vtex-brand-guidelines ~/.claude/skills/
-```
 
 ---
 
