@@ -1,8 +1,8 @@
 ---
 name: vtex-brand-guidelines
-description: This skill should be used when the user asks to "create a VTEX presentation", "make a VTEX slide deck", "apply VTEX brand guidelines", "generate a VTEX-branded document", "create a PPT following VTEX brand", "apply VTEX visual identity", "use VTEX colors and fonts", "create a VTEX proposal", "add the VTEX logo", or any request to produce documents, slides, HTML pages, mockups, or artifacts that must follow VTEX's official brand standards. Also use when mocking VTEX Admin UI screens for demos (product design system tokens included).
+description: This skill should be used when the user asks to "create a VTEX presentation", "make a VTEX slide deck", "apply VTEX brand guidelines", "generate a VTEX-branded document", "create a PPT following VTEX brand", "apply VTEX visual identity", "use VTEX colors and fonts", "create a VTEX proposal", "add the VTEX logo", "create an architecture diagram", "make a solution diagram", "draw a system/integration diagram", "diagram this VTEX architecture", or any request to produce documents, slides, HTML pages, mockups, diagrams, or artifacts that must follow VTEX's official brand standards. Also use when mocking VTEX Admin UI screens for demos (product design system tokens included). Applies automatically to any architecture/solution/integration diagram, even if VTEX branding isn't mentioned explicitly — diagrams for VTEX engagements always follow the brand's diagram standard by default.
 metadata:
-  version: 0.2.0
+  version: 0.3.0
 ---
 
 # VTEX Brand Guidelines Skill
@@ -166,6 +166,27 @@ For HTML, inline the SVG logo directly (copy contents of the appropriate `assets
 
 ---
 
+## Architecture & Solution Diagrams
+
+**Applies by default to every architecture, solution, integration, or system diagram — even if the request doesn't mention "VTEX brand."** Classify every box into one of four categories and style accordingly:
+
+| Category | Fill | Border | Text |
+|---|---|---|---|
+| VTEX native (OOTB) | Bubble Gum Pink `#FFC4DD` | Rebel Pink `#F71963` | Serious Black, bold |
+| Custom app / VTEX IO | White `#FFFFFF` | Serious Black `#142032` | Serious Black, bold |
+| Non-VTEX / external | Serious Gray `#5B6E84` | none | White, bold |
+| Middleware / integration layer | Serious Black `#142032` | none | White, bold (full-width banner) |
+
+- Title lockup top-left: **"VTEX"** in bold Rebel Pink + solution name in bold Serious Gray, uppercase
+- Always include a legend (bottom-left) mapping swatches to the four categories above
+- Arrows: Rebel Pink between VTEX-native components, Serious Gray/Black to or between external systems
+- Grouping containers: white fill, border colored to match what's inside; label overlaps the top-left border (like a fieldset legend), never centered
+- Never invent new colors for a diagram, and never use Action Blue `#134CD8` (that's Admin-UI-only, see `references/product-ui-tokens.md`)
+
+This is a technical-diagram exception to the marketing typography rules below — bold labels and uppercase sub-titles are fine here for legibility, unlike headline text. Full spec, HTML/CSS template, SVG arrow pattern, and Mermaid `classDef` snippet: `references/diagrams.md`.
+
+---
+
 ## Layout and Composition Rules
 
 - Use an **even number of columns** (symmetrical grid)
@@ -192,6 +213,7 @@ For HTML, inline the SVG logo directly (copy contents of the appropriate `assets
 | File | Contents | Read when |
 |---|---|---|
 | `references/pptx-generation.md` | Full python-pptx slide builders with logo embedding | Generating .pptx deliverables |
+| `references/diagrams.md` | Architecture/solution diagram color-coding, layout rules, HTML/CSS + SVG + Mermaid templates | Generating any architecture, solution, integration, or system diagram |
 | `references/colors.md` | Full palette with RGB, CMYK, Pantone values and usage rules | Print work or detailed color decisions |
 | `references/typography.md` | Complete typographic system, scale, spacing, prohibitions | Fine typographic control |
 | `references/logo-guidelines.md` | Logo variants, clearspace, dos and don'ts | Detailed logo application questions |

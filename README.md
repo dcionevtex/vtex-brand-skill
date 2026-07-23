@@ -16,6 +16,7 @@ Once installed, Claude will automatically apply VTEX brand standards when you as
 - Brand voice and tone guidance
 - Full `python-pptx` PowerPoint builder with slide templates
 - Marp markdown-to-slides pattern
+- **Architecture/solution diagram standard** — color-coded by component type (VTEX native, custom app, external system, middleware), applied by default to any architecture or system diagram, with HTML/CSS, SVG, and Mermaid templates
 - **Official logo assets** bundled in `assets/` (SVG in Rebel Pink / Serious Black / White) with a PNG generator for python-pptx
 - **Product UI (Admin) design tokens** from styleguide.vtex.com for demo mockups — kept separate from the brand palette
 
@@ -64,6 +65,7 @@ skill/
         ├── logo-guidelines.md          ← Clearspace, placement, dos/don'ts, bundled assets
         ├── voice-tone.md               ← Brand personality, copy principles, review checklist
         ├── pptx-generation.md          ← Full python-pptx builder with 6 slide templates
+        ├── diagrams.md                 ← Architecture/solution diagram standard + HTML/SVG/Mermaid templates
         └── product-ui-tokens.md        ← styleguide.vtex.com Admin tokens for demo mockups
 
 examples/
